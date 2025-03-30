@@ -84,6 +84,31 @@ public class MotorAlcadaTransacional : IMotorAlcada
         return _regras.FirstOrDefault(r => valor >= r.ValorMin && valor <= r.ValorMax);
     }
 
+    public List<List<string>> ObterGruposDeAprovadores(decimal valor)
+    {
+        var regra = ObterRegra(valor);
+
+        // Retorna os grupos originais ou uma lista vazia se não houver regra
+        return regra?.GruposDeUsuarios ?? [];
+    }
+
+    public string FormatarGruposComoTexto(decimal valor)
+    {
+        var grupos = ObterGruposDeAprovadores(valor);
+
+        return string.Join(" OR ",
+            grupos.Select(grupo =>
+                "(" + string.Join(" AND ", grupo) + ")"
+            )
+        );
+    }
+
+    public string ObterGruposFormatadosParaDebug(decimal valor)
+    {
+        var grupos = ObterGruposDeAprovadores(valor);
+
+        return string.Join(" | ", grupos.Select(g => $"[{string.Join(", ", g)}]"));
+    }
 
 }
 

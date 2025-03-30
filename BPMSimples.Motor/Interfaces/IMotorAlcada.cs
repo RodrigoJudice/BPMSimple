@@ -8,4 +8,7 @@ public interface IMotorAlcada
 {
     StatusAlcada ObterStatus(decimal valor, List<RegistroAlcada> aprovacoesJaRealizadas, ISegurancaBPM seguranca);
     RequisitoAlcada? ObterRegra(decimal valor);
+    List<List<string>> ObterGruposDeAprovadores(decimal valor);
+    string ObterGruposFormatadosParaDebug(decimal valor);
+    string FormatarGruposComoTexto(decimal valor);
 }

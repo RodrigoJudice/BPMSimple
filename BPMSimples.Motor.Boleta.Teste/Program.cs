@@ -14,6 +14,8 @@ internal class Program
             transacoes: new[] { "enviar", "aprovar" }
         );
 
+        Console.WriteLine(alcada.ObterGruposFormatadosParaDebug(200_000));
+        Console.WriteLine(alcada.FormatarGruposComoTexto(200_000));
 
         BoletaCCB boleta = new(1, WorkflowBoletaConfig.Estados.Estado1, seguranca, alcada);
 
