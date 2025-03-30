@@ -5,5 +5,6 @@ public class RequisitoAlcada
 {
     public decimal ValorMin { get; set; }
     public decimal ValorMax { get; set; }
-    public List<string> Usuarios { get; set; } = new();
+    // Cada grupo é uma lista de usuários que precisam aprovar
+    public List<List<string>> GruposDeUsuarios { get; set; } = [];
 }

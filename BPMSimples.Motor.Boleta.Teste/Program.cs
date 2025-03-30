@@ -8,8 +8,8 @@ internal class Program
     {
         var alcada = new MotorAlcadaTransacional();
         var seguranca = new SegurancaBoleta(
-            userName: "joao",
-            email: "joao@banco.com",
+            userName: "vp1",
+            email: "vp1@banco.com",
             grupos: new[] { "Mesa", "Risco" },
             transacoes: new[] { "enviar", "aprovar" }
         );
