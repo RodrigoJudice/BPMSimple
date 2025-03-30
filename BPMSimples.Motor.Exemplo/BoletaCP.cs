@@ -1,14 +1,19 @@
 ﻿using BPMSimples.Motor.Boleta.Config;
 using BPMSimples.Motor.Dominio;
 using BPMSimples.Motor.Interfaces;
-using BPMSimples.Motor.MaquinaEstado;
 
 namespace BPMSimples.Motor.Boleta;
 
-public class BoletaCP : StateMachineBPM
+public class BoletaCP : Boleta
 {
-    public BoletaCP(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM? seguranca = null) : base(idInstancia, estadoInicial, seguranca)
+    public BoletaCP(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM seguranca, IMotorAlcada? alcada = null)
+        : base(idInstancia, estadoInicial, seguranca, alcada)
     {
+    }
+
+    protected override decimal ObterValorOperacao()
+    {
+        return 500;
     }
     protected override void ConfigurarWorkflow()
     {

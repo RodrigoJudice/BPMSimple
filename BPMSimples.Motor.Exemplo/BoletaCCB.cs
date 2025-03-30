@@ -1,15 +1,21 @@
 ﻿using BPMSimples.Motor.Boleta.Config;
 using BPMSimples.Motor.Dominio;
 using BPMSimples.Motor.Interfaces;
-using BPMSimples.Motor.MaquinaEstado;
 
 namespace BPMSimples.Motor.Boleta;
 
-public class BoletaCCB : StateMachineBPM
+public class BoletaCCB : Boleta
 {
-    public BoletaCCB(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM? seguranca = null) : base(idInstancia, estadoInicial, seguranca)
+    public BoletaCCB(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM seguranca, IMotorAlcada? alcada = null)
+        : base(idInstancia, estadoInicial, seguranca, alcada)
     {
     }
+
+    protected override decimal ObterValorOperacao()
+    {
+        return 200_000;
+    }
+
     protected override void ConfigurarWorkflow()
     {
 
@@ -26,7 +32,7 @@ public class BoletaCCB : StateMachineBPM
         RegistrarTransicao(
             WorkflowBoletaConfig.Estados.Estado2,
             WorkflowBoletaConfig.Eventos.Aprovar,
-            WorkflowBoletaConfig.Estados.Estado3);
+            WorkflowBoletaConfig.Estados.Estado3, null, true);
 
         RegistrarTransicao(
             WorkflowBoletaConfig.Estados.Estado3,
