@@ -4,14 +4,14 @@ namespace BPMSimples.Motor.Boleta.Teste;
 
 internal class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
         var alcada = new MotorAlcadaTransacional();
         var seguranca = new SegurancaBoleta(
             userName: "joao",
             email: "joao@banco.com",
             grupos: new[] { "Mesa", "Risco" },
-            transacoes: new[] { "aprova_100_000", "aprova_500_000" }
+            transacoes: new[] { "enviar", "aprovar" }
         );
 
 

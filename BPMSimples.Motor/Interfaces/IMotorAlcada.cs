@@ -6,6 +6,6 @@ namespace BPMSimples.Motor.Interfaces;
 // Interface do motor de alçada
 public interface IMotorAlcada
 {
-    public StatusAlcada ObterStatus(decimal valor, ISegurancaBPM seguranca);
+    StatusAlcada ObterStatus(decimal valor, List<RegistroAlcada> aprovacoesJaRealizadas, ISegurancaBPM seguranca);
     RequisitoAlcada? ObterRegra(decimal valor);
 }

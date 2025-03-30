@@ -14,7 +14,6 @@ public abstract class StateMachineBPM
     protected readonly StateMachine<EstadoBPM, EventoBPM> _maquina;
     private readonly ISegurancaBPM _seguranca;
     private readonly IMotorAlcada? _motorAlcada;
-    private readonly List<string> _aprovadores = [];
 
     public List<TransicaoLogBPM> Transicoes { get; } = [];
     private readonly List<RegistroAlcada> _aprovacoes = [];
@@ -97,7 +96,7 @@ public abstract class StateMachineBPM
             if (_motorAlcada == null)
                 throw new InvalidOperationException("Motor de alçada não configurado.");
 
-            var status = _motorAlcada.ObterStatus(ObterValorOperacao(), _seguranca);
+            var status = _motorAlcada.ObterStatus(ObterValorOperacao(), _aprovacoes, _seguranca);
 
             foreach (var usuario in status.JaExecutadas)
             {

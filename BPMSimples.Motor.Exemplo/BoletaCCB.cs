@@ -27,12 +27,12 @@ public class BoletaCCB : Boleta
         RegistrarTransicao(
             WorkflowBoletaConfig.Estados.Estado1,
             WorkflowBoletaConfig.Eventos.Enviar,
-            WorkflowBoletaConfig.Estados.Estado2);
+            WorkflowBoletaConfig.Estados.Estado2, null, false, ["enviar"]);
 
         RegistrarTransicao(
             WorkflowBoletaConfig.Estados.Estado2,
             WorkflowBoletaConfig.Eventos.Aprovar,
-            WorkflowBoletaConfig.Estados.Estado3, null, true);
+            WorkflowBoletaConfig.Estados.Estado3, null, true, ["aprovar"]);
 
         RegistrarTransicao(
             WorkflowBoletaConfig.Estados.Estado3,

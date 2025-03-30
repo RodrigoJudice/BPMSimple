@@ -13,7 +13,7 @@ public class MotorAlcadaTransacional : IMotorAlcada
         new() { ValorMin = 500_001, ValorMax = decimal.MaxValue, Usuarios = ["vp"] },
     ];
 
-    public StatusAlcada ObterStatus(decimal valor, ISegurancaBPM seguranca)
+    public StatusAlcada ObterStatus(decimal valor, List<RegistroAlcada> aprovacoesJaRealizadas, ISegurancaBPM seguranca)
     {
         var status = new StatusAlcada();
 
@@ -32,6 +32,9 @@ public class MotorAlcadaTransacional : IMotorAlcada
             else
                 status.Faltantes.Add(usuarioEsperado);
         }
+
+        foreach (var usuario in aprovacoesJaRealizadas)
+            status.JaExecutadas.Add(usuario.Usuario);
 
         return status;
     }
