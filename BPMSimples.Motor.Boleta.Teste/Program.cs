@@ -10,12 +10,13 @@ internal class Program
         var seguranca = new SegurancaBoleta(
             userName: "vp1",
             email: "vp1@banco.com",
-            grupos: new[] { "Mesa", "Risco" },
-            transacoes: new[] { "enviar", "aprovar" }
+            grupos: ["Mesa", "Risco"],
+            transacoes: ["enviar", "aprovar"]
         );
 
         Console.WriteLine(alcada.ObterGruposFormatadosParaDebug(200_000));
         Console.WriteLine(alcada.FormatarGruposComoTexto(200_000));
+
 
         BoletaCCB boleta = new(1, WorkflowBoletaConfig.Estados.Estado1, seguranca, alcada);
 

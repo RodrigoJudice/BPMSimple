@@ -22,6 +22,10 @@ public abstract class StateMachineBPM
 
     public static readonly EventoBPM Evento_NULL = new(null);
 
+    protected PersistenciaStateMachine? _callbackPersistencia;
+
+
+
     protected StateMachineBPM(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM seguranca, IMotorAlcada? motorAlcada = null)
     {
         IdInstancia = idInstancia;
@@ -126,6 +130,9 @@ public abstract class StateMachineBPM
             Justificativa = justificativa,
             Data = DateTime.UtcNow
         });
+
+        if (_callbackPersistencia is not null)
+            await _callbackPersistencia(this);
 
         if (transicaoEncontrada != null && _acoesPorTransicao.TryGetValue(transicaoEncontrada, out var acao))
         {

@@ -1,14 +1,24 @@
 ﻿using BPMSimples.Motor.Boleta.Config;
+using BPMSimples.Motor.Boleta.Repositorio;
 using BPMSimples.Motor.Dominio;
 using BPMSimples.Motor.Interfaces;
+using BPMSimples.Motor.MaquinaEstado;
 
 namespace BPMSimples.Motor.Boleta;
 
-public class BoletaCCB : Boleta
+public class BoletaCCB : StateMachineBPM
 {
-    public BoletaCCB(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM seguranca, IMotorAlcada? alcada = null)
+    public BoletaBancaria DadosBoleta { get; set; } = default!;
+
+    public BoletaCCB(long idInstancia, EstadoBPM estadoInicial, ISegurancaBPM seguranca, IMotorAlcada? alcada = null, PersistenciaStateMachine? persistencia = null)
         : base(idInstancia, estadoInicial, seguranca, alcada)
     {
+        _callbackPersistencia = new PersistenciaStateMachine(async instancia =>
+        {
+            var repo = new BoletaCCBRepositoryFake();
+            await repo.SalvarAsync((BoletaCCB)instancia);
+        });
+
     }
 
     protected override decimal ObterValorOperacao()
